@@ -3,7 +3,7 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
-
+use Validator;
 class AppServiceProvider extends ServiceProvider
 {
     /**
@@ -14,6 +14,7 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         //
+        Validator::extend('custom_captcha', 'App\Http\CustomValidator@custom_captcha');
     }
 
     /**

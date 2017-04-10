@@ -96,7 +96,7 @@ return [
     | specify a specific custom language line for a given attribute rule.
     |
     */
-
+    'custom_captcha' => 'Google Thinks you\'re fishy.',
     'custom' => [
         'attribute-name' => [
             'rule-name' => 'custom-message',
