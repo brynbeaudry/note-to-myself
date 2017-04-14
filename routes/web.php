@@ -18,4 +18,10 @@ Route::get('/', function () {
 Auth::routes();
 Route::get('/verifyemail/{token}', 'Auth\RegisterController@verify');
 
+Route::resource('/notes', "NoteController");
+Route::resource('/websites', "WebsiteController");
+Route::resource('/images', "ImageController");
+Route::resource('/tdbs', "TBDController");
+
 Route::get('/home', 'HomeController@index');
+Route::post('/home', 'HomeController@save');
