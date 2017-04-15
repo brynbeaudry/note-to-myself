@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Image;
 
 class ImageController extends Controller
 {
@@ -46,6 +47,9 @@ class ImageController extends Controller
     public function show($id)
     {
         //
+        $img = Image::where('id', $id)->first();
+        //dd($img_path);
+        return view('images.show', compact('img'));
     }
 
     /**

@@ -13,7 +13,7 @@ class Image extends Model
      * @var array
      */
     protected $fillable = [
-        'delete', 'url'
+        'path', 'userId'
     ];
       //
       /**
