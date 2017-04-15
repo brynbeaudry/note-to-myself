@@ -60,6 +60,13 @@ class HomeController extends Controller
       ]);
     }
 
+    private function deleteChecked($checkBoxArray){
+      foreach ($checkBoxArray as $key => $value) {
+        $toDel=Image::findOrFail($value);
+        $toDel->delete();
+      }
+    }
+
     public function save(Request $request){
       // this gets called when you press save on the user's home page
       //For now, since there is only one save button in jason's example
@@ -73,7 +80,7 @@ class HomeController extends Controller
         $this->processImage($file, $userId);
       }
       if(isset($request->checkboxDel)){
-        dd($request->checkboxDel);
+        $this->deleteChecked($request->checkboxDel);
       }
 
 

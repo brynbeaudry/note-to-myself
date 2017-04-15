@@ -55,13 +55,13 @@ $tbd = DB::table('tbds')->where('userId', $user->id)->first();
                         </div>
                         <div id="images" class="col-sm-3">
                           <h2>Images</h2>
-                          <input type="file" name="file" accept="image/gif, image/jpeg">
+                          <input type="file" name="file" value="" accept="image/gif, image/jpeg">
                           @if(count($images) >0)
                           @foreach($images as $image)
                             <div>
                               <a href="images/{{$image->id}}"><img src="{{$image->path}}" alt="" height=100 width="auto"></a>
                               <label for="checkboxDel">Delete</label>
-                              <input id="{{$image->id}}" type="checkbox" name="checkboxDel" value="{{$image->id}}" />
+                              <input id="{{$image->id}}" type="checkbox" name="checkboxDel[]" value="{{$image->id}}" />
                             </div>
                           @endforeach
                           @endif
