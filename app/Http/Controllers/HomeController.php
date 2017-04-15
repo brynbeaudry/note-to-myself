@@ -66,6 +66,34 @@ class HomeController extends Controller
         $toDel->delete();
       }
     }
+    // Delete their old note and write whatever is in the box to the db
+    private function processNote($note, $userId) {
+        DB::table('notes')->where('userId', '=', $userId)->delete();
+        DB::table('notes')->insert([
+            ['text'=> $note, 'userId' => $userId]
+        ]);
+    }
+    // Delete their old ToBeDone and write whatever is in the box to the db
+    private function processTBD($tbd, $userId) {
+        DB::table('tbds')->where('userId', '=', $userId)->delete();
+        DB::table('tbds')->insert([
+            ['text'=> $tbd, 'userId' => $userId]
+        ]);
+    }
+    // Delete their old ToBeDone and write whatever is in the box to the db
+    private function processWebsites($websites, $userId) {
+        //dd($websites);
+        DB::table('websites')->where('userId', '=', $userId)->delete();
+        foreach($websites as $url) {
+            //dd($url);
+            if($url != null) {
+                DB::table('websites')->insert([
+                    ['url' => $url, 'userId' => $userId]
+                ]);
+            }
+        }
+    }
+
 
     public function save(Request $request){
       // this gets called when you press save on the user's home page
@@ -78,11 +106,25 @@ class HomeController extends Controller
       if(isset($request->file)){
         $file = $request->file('file');
         $this->processImage($file, $userId);
+
       }
       if(isset($request->checkboxDel)){
         $this->deleteChecked($request->checkboxDel);
       }
 
+      if(isset($request->notes)) {
+          $note = $request->notes;
+          $this->processNote($note, $userId);
+      }
+        if(isset($request->tbd)) {
+            $tbd = $request->tbd;
+            $this->processTBD($tbd, $userId);
+        }
+
+        if(isset($request->website)) {
+            $website = $request->website;
+            $this->processWebsites($website, $userId);
+        }
 
       return view('home');
     }
