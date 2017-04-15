@@ -47,7 +47,7 @@ $tbd = DB::table('tbds')->where('userId', $user->id)->first();
                           <h4>Click to Open</h4>
                           @if(count($website_urls))
                           @foreach($website_urls as $url)
-                            <input type="text" name="website[]" value="{{$url->url}}" onclick=''>
+                            <input type="text" name="website[]" value="{{$url->url}}" onclick='window.open("{{$url->url}}");'>
                           @endforeach
                           @endif
                           <input type="text" name="website[]"  onclick='' >
@@ -57,7 +57,11 @@ $tbd = DB::table('tbds')->where('userId', $user->id)->first();
                         </div>
                         <div id="images" class="col-sm-3">
                           <h2>Images</h2>
-                          <input type="file" name="file" value="" accept="image/gif, image/jpeg">
+                            @if(count($images) < 4)
+                                <input type="file" name="file" value="" accept="image/gif, image/jpeg">
+                            @else
+                                <p>maximum 4 images. delete some to upload new images.</p>
+                            @endif
                           @if(count($images) >0)
                           @foreach($images as $image)
                             <div>
