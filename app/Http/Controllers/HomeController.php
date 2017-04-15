@@ -45,6 +45,7 @@ class HomeController extends Controller
           return view('verification');
 
 
+
         //Going to return view "with data here."
         return view('home');
     }
@@ -131,7 +132,7 @@ class HomeController extends Controller
             $website = $request->website;
             $this->processWebsites($website, $userId);
         }
-
+        $request->session()->regenerate();
       return view('home');
     }
 }
