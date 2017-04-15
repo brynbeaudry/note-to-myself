@@ -66,14 +66,21 @@ class HomeController extends Controller
         $toDel->delete();
       }
     }
-
+    // Delete their old note and write whatever is in the box to the db
     private function processNote($note, $userId) {
         DB::table('notes')->where('userId', '=', $userId)->delete();
         DB::table('notes')->insert([
             ['text'=> $note, 'userId' => $userId]
         ]);
-
     }
+    // Delete their old ToBeDone and write whatever is in the box to the db
+    private function processTBD($tbd, $userId) {
+        DB::table('tbds')->where('userId', '=', $userId)->delete();
+        DB::table('tbds')->insert([
+            ['text'=> $tbd, 'userId' => $userId]
+        ]);
+    }
+
     public function save(Request $request){
       // this gets called when you press save on the user's home page
       //For now, since there is only one save button in jason's example
@@ -90,11 +97,15 @@ class HomeController extends Controller
       if(isset($request->checkboxDel)){
         $this->deleteChecked($request->checkboxDel);
       }
-
+   // dd($request);
       if(isset($request->notes)) {
           $note = $request->notes;
           $this->processNote($note, $userId);
       }
+        if(isset($request->tbd)) {
+            $tbd = $request->tbd;
+            $this->processTBD($tbd, $userId);
+        }
       //dd($request);
 
       return view('home');

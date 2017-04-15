@@ -13,7 +13,7 @@ class TBD extends Model
      * @var array
      */
     protected $fillable = [
-        'name','breed1', 'type', 'breed2','breed3','birthday', 'profileImgPath', 'ownerId',
+        'text', 'userId',
     ];
       //
       /**
