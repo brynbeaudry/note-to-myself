@@ -50,10 +50,21 @@ class HomeController extends Controller
 
       $ext = $file->guessClientExtension();
       $newImgId = DB::table('images')->max('id');
-      if($newId==null) $newId = 0;
-      $newId++;
-      $path = $file->move("images/{$userId}/{$newImgId}" , "{$newImgId}.{$ext}");
-      Storage::setVisibility($path, 'public');
+      if($newImgId==null) $newImgId = 0;
+      $newImgId++;
+      $path = $file->move("images/{$userId}" , "{$newImgId}.{$ext}");
+      //Storage::setVisibility($path, 'public');
+      //dd($path);
+      DB::table('images')->insert([
+        ['path' => $path, 'userId' => $userId ]
+      ]);
+    }
+
+    private function deleteChecked($checkBoxArray){
+      foreach ($checkBoxArray as $key => $value) {
+        $toDel=Image::findOrFail($value);
+        $toDel->delete();
+      }
     }
 
     public function save(Request $request){
@@ -66,8 +77,13 @@ class HomeController extends Controller
       //Dealing with Uploaded file
       if(isset($request->file)){
         $file = $request->file('file');
-        processImage($file, $userId);
+        $this->processImage($file, $userId);
+      }
+      if(isset($request->checkboxDel)){
+        $this->deleteChecked($request->checkboxDel);
       }
 
+
+      return view('home');
     }
 }
