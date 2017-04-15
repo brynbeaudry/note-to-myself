@@ -8,7 +8,7 @@
                 <div class="panel-heading">Registration</div>
 
                 <div class="panel-body">
-                    An email has been sent to you for verification.
+                    <p>You have attempted to log into this account too many times. We have sent you an email with a link to change your password.</p>
                     @if(Auth::check())
                       {{Auth::logout()}}
                     @endif

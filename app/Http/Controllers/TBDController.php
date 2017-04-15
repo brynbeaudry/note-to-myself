@@ -3,10 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Image;
-use Auth;
 
-class ImageController extends Controller
+class TBDController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,11 +14,6 @@ class ImageController extends Controller
     public function index()
     {
         //
-    }
-
-    public function __construct()
-    {
-        $this->middleware('auth');
     }
 
     /**
@@ -52,15 +45,7 @@ class ImageController extends Controller
      */
     public function show($id)
     {
-        if(Auth::user()->verified==0)
-          return view('verification');
-        if(Auth::check()){
         //
-        $img = Image::where('id', $id)->first();
-        //dd($img_path);
-        return view('images.show', compact('img'));
-      }
-      return view('login')->with('error', 'please login first');
     }
 
     /**

@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 //These are the Eloquent Models
+use App\Users;
 use App\Note;
 use App\Image;
 use App\TBD;
@@ -23,6 +24,7 @@ class HomeController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
+        //$this->middleware('verified');
     }
 
     /**
@@ -32,6 +34,17 @@ class HomeController extends Controller
      */
     public function index()
     {
+        /*
+        $images = Image::where('userId', "=", $userId)->get();
+        $img_urls = array();
+        foreach($images as $image){
+            array_push($img_urls, $image->url);
+        }
+        */
+        if(Auth::user()->verified==0)
+          return view('verification');
+
+
 
         //Going to return view "with data here."
         return view('home');
@@ -40,6 +53,9 @@ class HomeController extends Controller
     private function processImage($file, $userId){
 
       $ext = $file->guessClientExtension();
+      if($ext!= "gif" or $ext != "jpg"){
+        echo "You may only upload .jpg or .gif";
+      }
       $newImgId = DB::table('images')->max('id');
       if($newImgId==null) $newImgId = 0;
       $newImgId++;

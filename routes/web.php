@@ -17,6 +17,7 @@ Route::get('/', function () {
 
 Auth::routes();
 Route::get('/verifyemail/{token}', 'Auth\RegisterController@verify');
+Route::get('/securityemail/{token}', 'Auth\RegisterController@security');
 
 Route::resource('/notes', "NoteController");
 Route::resource('/websites', "WebsiteController");
@@ -25,3 +26,4 @@ Route::resource('/tbds', "TBDController");
 
 Route::get('/home', 'HomeController@index');
 Route::post('/home', 'HomeController@save');
+Route::get('/security', 'SecurityController@toomany');
