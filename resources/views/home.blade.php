@@ -21,6 +21,7 @@ $note = DB::table('notes')->where('userId', $user->id)->first();
 $images = DB::table('images')->where('userId', $user->id)->get();
 $website_urls = DB::table('websites')->where('userId', $user->id)->value('url');
 $tbd = DB::table('tbds')->where('userId', $user->id)->first();
+//dd($note);
 ?>
 <div class="container">
     <div class="row">
@@ -34,11 +35,11 @@ $tbd = DB::table('tbds')->where('userId', $user->id)->first();
                     <container>
                       <div class="row">
                         <div class="col-sm-3">
-                          <h2>Notes</h1>
-                          @if($note!=null)
-                            <textarea id="notes" name="notes" value="{{$note->text}}" rows="50"></textarea>
+                          <h2>Notes</h2>
+                          @if(count($note) > 0)
+                            <textarea id="notes" name="notes" rows="50">{{$note->text}}</textarea>
                           @else
-                            <textarea id="notes" name="notes" value="" rows="50"></textarea>
+                            <textarea id="notes" name="notes" value="qwerty" rows="50"></textarea>
                           @endif
                         </div>
                         <div id="websites" class="col-sm-3">

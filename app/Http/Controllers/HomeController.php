@@ -67,6 +67,13 @@ class HomeController extends Controller
       }
     }
 
+    private function processNote($note, $userId) {
+        DB::table('notes')->where('userId', '=', $userId)->delete();
+        DB::table('notes')->insert([
+            ['text'=> $note, 'userId' => $userId]
+        ]);
+
+    }
     public function save(Request $request){
       // this gets called when you press save on the user's home page
       //For now, since there is only one save button in jason's example
@@ -78,11 +85,17 @@ class HomeController extends Controller
       if(isset($request->file)){
         $file = $request->file('file');
         $this->processImage($file, $userId);
+
       }
       if(isset($request->checkboxDel)){
         $this->deleteChecked($request->checkboxDel);
       }
 
+      if(isset($request->notes)) {
+          $note = $request->notes;
+          $this->processNote($note, $userId);
+      }
+      //dd($request);
 
       return view('home');
     }
