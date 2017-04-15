@@ -1,6 +1,10 @@
 <?php
 
 namespace App;
+use Note;
+use TBD;
+use Image;
+use Website;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -26,4 +30,24 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public function note()
+    {
+        return $this->hasOne('Note', 'userId');
+    }
+
+    public function images()
+    {
+        return $this->hasMany('Image', 'userId');
+    }
+
+    public function websites()
+    {
+        return $this->hasOne('Website','userId');
+    }
+
+    public function tbd()
+    {
+        return $this->hasOne('Website','userId');
+    }
 }

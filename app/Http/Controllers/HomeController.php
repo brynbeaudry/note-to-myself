@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 //These are the Eloquent Models
 use App\Note;
 use App\Image;
@@ -30,8 +32,28 @@ class HomeController extends Controller
      */
     public function index()
     {
+        /*
+        $images = Image::where('userId', "=", $userId)->get();
+        $img_urls = array();
+        foreach($images as $image){
+            array_push($img_urls, $image->url);
+        }
+        */
+
+
+
         //Going to return view "with data here."
         return view('home');
+    }
+
+    private function processImage($file, $userId){
+
+      $ext = $file->guessClientExtension();
+      $newImgId = DB::table('images')->max('id');
+      if($newId==null) $newId = 0;
+      $newId++;
+      $path = $file->move("images/{$userId}/{$newImgId}" , "{$newImgId}.{$ext}");
+      Storage::setVisibility($path, 'public');
     }
 
     public function save(Request $request){
@@ -40,6 +62,12 @@ class HomeController extends Controller
       //Delete everyhing from the Database and and put the new input back into the database. You can "show tables" in mysql and "describe <table anme>" to see what
       //The desposied models look like. Or check out the migrations to see what they look like
       //REmeber, the dasboard, for now, is basically  a form. When it's loaded the form should be populated by what was in the database. When it's saved, the database should be filled with the data from the form. This is where we start,a nd then we have to meet all jason's little requirements.
+      $userId = Auth::user()->id;
+      //Dealing with Uploaded file
+      if(isset($request->file)){
+        $file = $request->file('file');
+        processImage($file, $userId);
+      }
 
     }
 }
