@@ -11,13 +11,13 @@ in. Users cannot login to the system until this link has been clicked. -NEED TO 
 5.	If a user fails three times in a row to give the correct password for a given username, the account becomes “locked” and an email is sent to the user  
 with a new password (as in step 3, above) and a hyperlink to click. Once the hyperlink is clicked, the user will be advised a break-in attempt was detected 
 on their account, and they will be asked for their new password. Then they can log in again.
-6.	The application must allow the user to store notes in a database and retrieve them, as the sample system does.
-7.	The application must allow the user to store tbd in a database and retrieve them, as the sample system does.
-8.	The application must allow the user to store hyperlinks in a database and retrieve them, as the sample system does. 
-9.	The application must allow the user to store images in a database (not in the filesystem) and retrieve them, as the sample system does.
-10.	Users can update notes by editing the textarea.
-11.	Users can update tbd by editing the textarea.
-12.	Users can update hyperinks by editing the textboxes.
+6.	The application must allow the user to store notes in a database and retrieve them, as the sample system does. --done
+7.	The application must allow the user to store tbd in a database and retrieve them, as the sample system does. --done
+8.	The application must allow the user to store hyperlinks in a database and retrieve them, as the sample system does. --done
+9.	The application must allow the user to store images in a database (not in the filesystem) and retrieve them, as the sample system does. --done
+10.	Users can update notes by editing the textarea. --done
+11.	Users can update tbd by editing the textarea. --done
+12.	Users can update hyperinks by editing the textboxes. --done
 13.	Users can only upload a maximum of four images per account.
 14.	Users can only upload .jpg and .gif images.
 15.	Users can delete images easily.

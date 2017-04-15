@@ -47,7 +47,7 @@ $tbd = DB::table('tbds')->where('userId', $user->id)->first();
                           <h4>Click to Open</h4>
                           @if(count($website_urls))
                           @foreach($website_urls as $url)
-                            <input type="text" name="website[]" value="{{$url->url}}" onclick=''>
+                            <input type="text" name="website[]" value="{{$url->url}}" onclick='window.open("{{$url->url}}");'>
                           @endforeach
                           @endif
                           <input type="text" name="website[]"  onclick='' >
