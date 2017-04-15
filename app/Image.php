@@ -13,7 +13,7 @@ class Image extends Model
      * @var array
      */
     protected $fillable = [
-        'name','breed1', 'type', 'breed2','breed3','birthday', 'profileImgPath', 'ownerId',
+        'path', 'userId'
     ];
       //
       /**
@@ -22,4 +22,5 @@ class Image extends Model
        * @var string
        */
       protected $table = 'images';
+
 }
