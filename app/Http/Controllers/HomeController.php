@@ -32,15 +32,6 @@ class HomeController extends Controller
      */
     public function index()
     {
-        /*
-        $images = Image::where('userId', "=", $userId)->get();
-        $img_urls = array();
-        foreach($images as $image){
-            array_push($img_urls, $image->url);
-        }
-        */
-
-
 
         //Going to return view "with data here."
         return view('home');
@@ -125,7 +116,7 @@ class HomeController extends Controller
             $website = $request->website;
             $this->processWebsites($website, $userId);
         }
-
+        $request->session()->regenerate();
       return view('home');
     }
 }

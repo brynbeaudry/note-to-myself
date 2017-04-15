@@ -37,9 +37,9 @@ $tbd = DB::table('tbds')->where('userId', $user->id)->first();
                         <div class="col-sm-3">
                           <h2>Notes</h2>
                           @if(isset($note) > 0)
-                            <textarea id="notes" name="notes" rows="50">{{$note->text}}</textarea>
+                            <textarea id="notes" name="notes" rows="30">{{$note->text}}</textarea>
                           @else
-                            <textarea id="notes" name="notes" value="qwerty" rows="50"></textarea>
+                            <textarea id="notes" name="notes" rows="30"></textarea>
                           @endif
                         </div>
                         <div id="websites" class="col-sm-3">
@@ -75,9 +75,9 @@ $tbd = DB::table('tbds')->where('userId', $user->id)->first();
                         <div class="col-sm-3">
                           <h2>To be Done</h2>
                           @if(isset($tbd))
-                            <textarea id="tbd" name="tbd" value="" rows="50">{{$tbd->text}}</textarea>
+                            <textarea id="tbd" name="tbd" value="" rows="30">{{$tbd->text}}</textarea>
                           @else
-                            <textarea id="tbd" name="tbd" value="" rows="50"></textarea>
+                            <textarea id="tbd" name="tbd" value="" rows="30"></textarea>
                           @endif
                         </div>
                       </div>
