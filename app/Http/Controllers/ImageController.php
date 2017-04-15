@@ -52,6 +52,8 @@ class ImageController extends Controller
      */
     public function show($id)
     {
+        if(Auth::user()->verified==0)
+          return view('verification');
         if(Auth::check()){
         //
         $img = Image::where('id', $id)->first();

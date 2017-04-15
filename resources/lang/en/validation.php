@@ -97,6 +97,7 @@ return [
     |
     */
     'custom_captcha' => 'Google Thinks you\'re fishy.',
+    'custom_verify' => 'Please Check your email.',
     'custom' => [
         'attribute-name' => [
             'rule-name' => 'custom-message',

@@ -15,6 +15,7 @@ class AppServiceProvider extends ServiceProvider
     {
         //
         Validator::extend('custom_captcha', 'App\Http\CustomValidator@custom_captcha');
+        
     }
 
     /**

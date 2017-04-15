@@ -8,7 +8,11 @@
                 <div class="panel-heading">Registration</div>
 
                 <div class="panel-body">
-                    You have successfully registered. An email has been sent to you for verification.
+                    An email has been sent to you for verification.
+                    @if(Auth::check())
+                      {{Auth::logout()}}
+                    @endif
+                      <p>Please check your email and <a href="{{ route('login') }}">Login</a></p>
                 </div>
             </div>
         </div>

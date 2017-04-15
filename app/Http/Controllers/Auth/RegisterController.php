@@ -10,6 +10,7 @@ use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
 use App\Jobs\SendVerificationEmail;
 
+
 class RegisterController extends Controller
 {
     /*
@@ -24,6 +25,7 @@ class RegisterController extends Controller
     */
 
     use RegistersUsers;
+    use ResetsPasswords;
 
     /**
      * Where to redirect users after registration.
@@ -85,7 +87,7 @@ class RegisterController extends Controller
     //this is where the validator function called.
     $this->validator($request->all())->validate();
     event(new Registered($user = $this->create($request->all())));
-     $job = (new SendVerificationEmail($user))->onConnection('database');
+    $job = (new SendVerificationEmail($user))->onConnection('database');
     dispatch($job);
     return view('verification');
   }
@@ -100,8 +102,26 @@ class RegisterController extends Controller
   {
     $user = User::where('email_token',$token)->first();
     $user->verified = 1;
+
     if($user->save()){
       return view('emailconfirm',['user'=>$user]);
     }
+  }
+
+
+/**
+* Handle a security request for the application.
+*
+* @param $token
+* @return \Illuminate\Http\Response
+*/
+  public function security($token)
+  {
+    $user = User::where('email_token',$token)->first();
+    $user->verified = 1;
+    $user->save();
+    return view('auth.passwords.reset')->with(
+        ['token' => $token, 'email' => $user->email, 'message' => 'Someone has been attempting to enter your account. Please reset your password.']
+    );
   }
 }

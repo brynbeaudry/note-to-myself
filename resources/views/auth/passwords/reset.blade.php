@@ -14,6 +14,12 @@
                         </div>
                     @endif
 
+                    @if(isset($message))
+                    <div class="alert alert-danger">
+                        {{ $message }}
+                    </div>
+                    @endif
+
                     <form class="form-horizontal" role="form" method="POST" action="{{ route('password.request') }}">
                         {{ csrf_field() }}
 

@@ -24,7 +24,7 @@ class HomeController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
-        $this->middleware('verified');
+        //$this->middleware('verified');
     }
 
     /**
@@ -41,7 +41,8 @@ class HomeController extends Controller
             array_push($img_urls, $image->url);
         }
         */
-
+        if(Auth::user()->verified==0)
+          return view('verification');
 
 
         //Going to return view "with data here."
@@ -51,6 +52,9 @@ class HomeController extends Controller
     private function processImage($file, $userId){
 
       $ext = $file->guessClientExtension();
+      if($ext!= "gif" or $ext != "jpg"){
+        echo "You may only upload .jpg or .gif";
+      }
       $newImgId = DB::table('images')->max('id');
       if($newImgId==null) $newImgId = 0;
       $newImgId++;
