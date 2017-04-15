@@ -80,6 +80,17 @@ class HomeController extends Controller
             ['text'=> $tbd, 'userId' => $userId]
         ]);
     }
+    // Delete their old ToBeDone and write whatever is in the box to the db
+    private function processWebsites($websites, $userId) {
+       // dd($websites);
+        //DB::table('websites')->where('userId', '=', $userId)->delete();
+        foreach($websites as $url) {
+            DB::table('websites')->insert([
+                ['url' => $url, 'userId' => $userId]
+            ]);
+        }
+    }
+
 
     public function save(Request $request){
       // this gets called when you press save on the user's home page
@@ -97,7 +108,7 @@ class HomeController extends Controller
       if(isset($request->checkboxDel)){
         $this->deleteChecked($request->checkboxDel);
       }
-   // dd($request);
+
       if(isset($request->notes)) {
           $note = $request->notes;
           $this->processNote($note, $userId);
@@ -106,7 +117,11 @@ class HomeController extends Controller
             $tbd = $request->tbd;
             $this->processTBD($tbd, $userId);
         }
-      //dd($request);
+
+        if(isset($request->website)) {
+            $website = $request->website;
+            $this->processWebsites($website, $userId);
+        }
 
       return view('home');
     }

@@ -19,9 +19,9 @@ $.ajaxSetup({
 $user = Auth::user();
 $note = DB::table('notes')->where('userId', $user->id)->first();
 $images = DB::table('images')->where('userId', $user->id)->get();
-$website_urls = DB::table('websites')->where('userId', $user->id)->value('url');
+$website_urls = DB::table('websites')->where('userId', $user->id)->get();
 $tbd = DB::table('tbds')->where('userId', $user->id)->first();
-//dd($note);
+//dd($website_urls);
 ?>
 <div class="container">
     <div class="row">
@@ -45,14 +45,15 @@ $tbd = DB::table('tbds')->where('userId', $user->id)->first();
                         <div id="websites" class="col-sm-3">
                           <h2>Websites</h2>
                           <h4>Click to Open</h4>
-                          @if(count($website_urls))>0)
+                          @if(count($website_urls))
                           @foreach($website_urls as $url)
-                            <input type="text" name="website" value="{{$url}}" onclick=''>
+                            <input type="text" name="website" value="{{$url->url}}" onclick=''>
                           @endforeach
                           @endif
-                          <input type="text" name="website" value="" onclick=''>
-                          <input type="text" name="website" value="" onclick=''>
-                          <input type="text" name="website" value="" onclick=''>
+                          <input type="text" name="website[]"  onclick='' >
+                            <input type="text" name="website[]"  onclick='' >
+                            <input type="text" name="website[]"  onclick='' >
+
                         </div>
                         <div id="images" class="col-sm-3">
                           <h2>Images</h2>
