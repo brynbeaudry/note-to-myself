@@ -82,12 +82,15 @@ class HomeController extends Controller
     }
     // Delete their old ToBeDone and write whatever is in the box to the db
     private function processWebsites($websites, $userId) {
-       // dd($websites);
-        //DB::table('websites')->where('userId', '=', $userId)->delete();
+        //dd($websites);
+        DB::table('websites')->where('userId', '=', $userId)->delete();
         foreach($websites as $url) {
-            DB::table('websites')->insert([
-                ['url' => $url, 'userId' => $userId]
-            ]);
+            //dd($url);
+            if($url != null) {
+                DB::table('websites')->insert([
+                    ['url' => $url, 'userId' => $userId]
+                ]);
+            }
         }
     }
 

@@ -47,13 +47,13 @@ $tbd = DB::table('tbds')->where('userId', $user->id)->first();
                           <h4>Click to Open</h4>
                           @if(count($website_urls))
                           @foreach($website_urls as $url)
-                            <input type="text" name="website" value="{{$url->url}}" onclick=''>
+                            <input type="text" name="website[]" value="{{$url->url}}" onclick=''>
                           @endforeach
                           @endif
                           <input type="text" name="website[]"  onclick='' >
                             <input type="text" name="website[]"  onclick='' >
                             <input type="text" name="website[]"  onclick='' >
-
+                            <input type="text" name="website[]"  onclick='' >
                         </div>
                         <div id="images" class="col-sm-3">
                           <h2>Images</h2>
